@@ -7,17 +7,19 @@ Python implementation of GNMI Client with REPL shell interface. Should work with
 pip install cmd2
 pip install pyang
 ```
-
 * Pybindpugin is at https://github.com/robshakir/pyangbind
-
+* Copy gnmi.proto file from github
+```
+git clone https://github.com/openconfig/gnmi/tree/master/proto
+```
+* Generate python classes for gnmi.proto. Check out grpc.io
 * Expects the openconfig yang models are in local directory (under public)
 ```
 git clone https://github.com/openconfig/public.git
 ```
 * Use pyang and pybindplugin to build python classes from yang model files
 ```
-for example:
-    pyang --plugindir $PYBINDPLUGIN -f pybind -p public/release/models/ -o ocwifi_mac.py public/release/models/wifi/mac/openconfig-wifi-mac.yang
+pyang --plugindir $PYBINDPLUGIN -f pybind -p public/release/models/ -o ocwifi_mac.py public/release/models/wifi/mac/openconfig-wifi-mac.yang
 ```
 * To enable cert based gnmi authentication with the server, create self-signed certs
 ```
@@ -33,12 +35,12 @@ gNMITarget is a dummy gnmi server which uses the gnmi interface to connect to an
 
 * With TLS
 ```
-    $ python2.7 gNMITarget.py --tls -cert certs/certificate.crt -pvtkey certs/private.key localhost:5001
+$ python2.7 gNMITarget.py --tls -cert certs/certificate.crt -pvtkey certs/private.key localhost:5001
 ```
 
 * Without TLS
 ```
-    $ python2.7 gNMITarget.py localhost:5001
+$ python2.7 gNMITarget.py localhost:5001
 ```
 
 ### starting a gnmi client repl
@@ -50,18 +52,18 @@ the following
 * TODO: set and subscribe
 
 ```
+
 $ python2.7 gNMIClient.py
+Welcome to the GNMI Client CLI. Type help or ? to list commands
 
-    $ python2.7 gNMIClient.py
-    Welcome to the GNMI Client CLI. Type help or ? to list commands
+ocREPL# ?
 
-    ocREPL# ?
+Documented commands (type help <topic>):
+========================================
+capabilities  connect  describe  get  help  history  quit  set  shortcuts
 
-    Documented commands (type help <topic>):
-    ========================================
-    capabilities  connect  describe  get  help  history  quit  set  shortcuts
-
-    ocREPL#
+ocREPL#
 ```
+## Screenshots
 
 
